@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services - Waste2Worth</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">Waste2<span>Worth</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+    <ul class="nav-links" id="primary-navigation">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="upload.html">Upload</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="upcycle.html">Upcycle</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="wrap">
+  <div class="section-head">
+    <h1>Services near you</h1>
+    <p class="lede">Repairers, recyclers, upcyclers, donation centers and resellers - ready to take the next step with you.</p>
+  </div>
+
+  <div class="filter-row">
+    <button type="button" class="filter-btn selected" data-type="All">All</button>
+    <button type="button" class="filter-btn" data-type="Repair">Repair</button>
+    <button type="button" class="filter-btn" data-type="Recycler">Recycler</button>
+    <button type="button" class="filter-btn" data-type="Upcycler">Upcycler</button>
+    <button type="button" class="filter-btn" data-type="Donation">Donation</button>
+    <button type="button" class="filter-btn" data-type="Reseller">Reseller</button>
+  </div>
+  <label class="sr-only" for="serviceLocation">Filter services by location</label>
+  <input id="serviceLocation" class="filter-input" placeholder="Filter by location">
+
+  <div class="card-grid" id="servicesGrid"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Waste2Worth</span>
+    <span>Providers are loaded from the services database.</span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

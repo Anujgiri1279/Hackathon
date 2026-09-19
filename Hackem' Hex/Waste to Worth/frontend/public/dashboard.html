@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Waste2Worth</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">Waste2<span>Worth</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+    <ul class="nav-links" id="primary-navigation">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="upload.html">Upload</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="upcycle.html">Upcycle</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="wrap">
+  <div class="section-head">
+    <h1>My impact</h1>
+    <p class="lede">Small actions, measured.</p>
+  </div>
+
+  <div class="impact-grid" id="impactStats"></div>
+  <form id="profileForm" class="upload-panel">
+    <h2>Your profile</h2>
+    <p class="lede">Save your details once so analyses and impact activity stay connected to you.</p>
+    <div class="form-grid">
+      <label>Full name<input id="profileFullName" name="fullName" required maxlength="120"></label>
+      <label>Email<input id="profileEmail" name="email" type="email" maxlength="254"></label>
+      <label>Phone<input id="profilePhone" name="phone" type="tel" maxlength="30"></label>
+      <label>Location<input id="profileLocation" name="location" maxlength="160"></label>
+    </div>
+    <button class="btn btn-primary" type="submit">Save profile</button>
+    <p class="error-message" id="profileMessage" role="status"></p>
+  </form>
+  <form id="dashboardUserForm" class="upload-panel">
+    <label for="dashboardUserId">User ID</label>
+    <label for="dashboardUserId">User ID</label>
+    <input id="dashboardUserId" placeholder="Supabase user ID" autocomplete="username" required>
+    <button class="btn btn-primary" type="submit">Load dashboard</button>
+    <p class="error-message" id="dashboardMessage" role="status"></p>
+  </form>
+
+  <h2>Recent activity</h2>
+  <div class="table-wrap">
+    <table class="activity">
+      <thead>
+        <tr><th>Item</th><th>Action</th><th>Status</th></tr>
+      </thead>
+      <tbody id="activityBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Waste2Worth</span>
+    <span>Impact is loaded from your account activity.</span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

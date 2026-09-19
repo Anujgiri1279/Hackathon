@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace - Waste2Worth</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">Waste2<span>Worth</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+    <ul class="nav-links" id="primary-navigation">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="upload.html">Upload</a></li>
+      <li><a href="marketplace.html" class="active">Marketplace</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="upcycle.html">Upcycle</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="wrap">
+  <div class="section-head">
+    <h1>Marketplace</h1>
+    <p class="lede">Secondhand items from people nearby, given a second life instead of a bin.</p>
+  </div>
+
+  <div class="filter-row">
+    <button type="button" class="filter-btn selected" data-category="All">All</button>
+    <button type="button" class="filter-btn" data-category="Furniture">Furniture</button>
+    <button type="button" class="filter-btn" data-category="Electronics">Electronics</button>
+    <button type="button" class="filter-btn" data-category="Clothes">Clothes</button>
+    <button type="button" class="filter-btn" data-category="Books">Books</button>
+    <button type="button" class="filter-btn" data-category="Appliances">Appliances</button>
+    <button type="button" class="filter-btn" data-category="Others">Others</button>
+  </div>
+
+  <form id="listingForm" class="upload-panel">
+    <h2>List an item</h2>
+    <div class="form-grid">
+      <label>Title<input name="title" placeholder="e.g. Solid wood chair" required></label>
+      <label>Category<input name="category" placeholder="e.g. Furniture" required></label>
+      <label>Price (₹)<input name="price" type="number" min="0" step="0.01" required></label>
+      <label>Condition<input name="condition" placeholder="e.g. Good"></label>
+      <label>Location<input name="location" placeholder="City or area" required></label>
+      <label>Contact phone<input name="contactPhone" placeholder="Optional phone number"></label>
+      <label>Image URL<input name="imageUrl" type="url" placeholder="Optional https://…"></label>
+    </div>
+    <label>Description<textarea name="description" placeholder="Describe the item, size and anything buyers should know"></textarea></label>
+    <button class="btn btn-primary" type="submit">Publish listing</button>
+    <p class="error-message" id="listingMessage" role="status"></p>
+  </form>
+  <div class="card-grid" id="marketplaceGrid"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Waste2Worth</span>
+    <span>Listings are loaded from the marketplace database.</span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

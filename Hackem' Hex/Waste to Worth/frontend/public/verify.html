@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waste2Worth - Verify email</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="site-nav"><div class="wrap"><a href="index.html" class="brand">Waste2<span>Worth</span></a><a href="auth.html">Sign in</a></div></nav>
+<main class="wrap auth-shell">
+  <div class="section-head">
+    <h1>Check your email</h1>
+    <p class="lede">Your account was created. Check your inbox and click the verification link to continue.</p>
+  </div>
+  <div class="upload-panel">
+    <p id="verifyEmail" class="meta"></p>
+    <p id="verifyInstructions">Check your inbox and spam folder. Once you verify your email, we will take you to Waste2Worth automatically.</p>
+    <button id="resendButton" class="btn btn-primary" type="button">Resend verification email</button>
+    <a id="signInLink" class="btn btn-secondary" href="auth.html">Go to sign in</a>
+    <p id="verifyMessage" class="error-message" role="status"></p>
+  </div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/verify.js"></script>
+</body>
+</html>

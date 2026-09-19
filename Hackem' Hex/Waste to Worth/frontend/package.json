@@ -1,0 +1,12 @@
+{
+  "name": "waste2worth-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Waste2Worth static frontend",
+  "scripts": {
+    "start": "npx serve public -l 3000"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}

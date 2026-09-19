@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Waste - Waste2Worth</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">Waste2<span>Worth</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+    <ul class="nav-links" id="primary-navigation">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="upload.html" class="active">Upload</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="upcycle.html">Upcycle</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="wrap">
+  <div class="section-head">
+    <h1>Upload your item</h1>
+    <p class="lede">Add a photo and tell us what you're leaning toward. We'll take it from there.</p>
+  </div>
+
+  <div class="upload-panel">
+    <label class="drop-zone" for="wasteImage">
+      <img id="previewImg" alt="Preview of uploaded item" hidden>
+      <div class="drop-zone-icon" aria-hidden="true">Photo</div>
+      <p><strong>Upload an image of your waste</strong></p>
+      <p class="preset-hint">Choose an image or take a photo</p>
+      <input type="file" id="wasteImage" accept="image/*" aria-describedby="uploadHint">
+      <p class="file-details" id="fileDetails" aria-live="polite">No file selected</p>
+    </label>
+
+    <p class="preset-hint" id="uploadHint">The image is sent to the Waste2Worth API for analysis. Use a clear, well-lit photo showing the whole item.</p>
+
+    <div class="btn-row">
+      <button type="button" id="analyzeBtn" class="btn btn-primary">Analyze Waste</button>
+    </div>
+
+    <div class="analyzing" id="analyzingState" role="status" aria-live="polite" hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span>AI analyzing...</span>
+    </div>
+    <p class="error-message" id="uploadError" role="alert"></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Waste2Worth</span>
+    <span>Your image is securely processed by the Waste2Worth backend.</span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

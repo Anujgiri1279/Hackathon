@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waste2Worth Hackemhex Test Report</title>
+  <style>
+    :root { --ink:#1b2a1e; --paper:#f4f1df; --card:#fffdf2; --green:#2f5233; --line:#cdd3bd; --pass:#176b38; --warn:#946200; --fail:#a52929; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.55 Arial,sans-serif; }
+    main { max-width:1200px; margin:auto; padding:34px 22px 70px; }
+    h1,h2 { color:var(--green); } h1 { margin-bottom:5px; } h2 { margin-top:34px; border-bottom:2px solid var(--line); padding-bottom:7px; }
+    .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:24px 0; }
+    .metric,.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:15px; }
+    .metric strong { display:block; font-size:25px; color:var(--green); }
+    table { width:100%; border-collapse:collapse; background:var(--card); margin:12px 0 20px; }
+    th,td { border:1px solid var(--line); padding:9px; text-align:left; vertical-align:top; }
+    th { background:#e7ead4; color:var(--green); } .pass { color:var(--pass); font-weight:bold; } .warn { color:var(--warn); font-weight:bold; } .fail { color:var(--fail); font-weight:bold; }
+    code { background:#e8eadc; padding:2px 5px; border-radius:3px; } ul { padding-left:22px; } .small { color:#596455; font-size:13px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Waste2Worth — Hackemhex Final Test Report</h1>
+  <p><strong>Package:</strong> <code>Waste2Worth-Hackemhex-Final</code><br>
+  <strong>Location:</strong> <code>C:\Users\Admin\Desktop\Waste2Worth-Hackemhex-Final</code><br>
+  <strong>Test date:</strong> 19 September 2026<br>
+  <strong>Scope:</strong> backend startup/API behavior, frontend serving, upload validation, upcycle image wiring, search links, security-sensitive request wiring, and credit-safe AI verification.</p>
+
+  <div class="summary">
+    <div class="metric"><strong class="pass">PASS</strong>Core API and page serving</div>
+    <div class="metric"><strong class="pass">PASS</strong>Upload validation</div>
+    <div class="metric"><strong class="pass">PASS</strong>Image UI and auto-scan wiring</div>
+    <div class="metric"><strong class="pass">PASS</strong>Search-link generation</div>
+    <div class="metric"><strong class="warn">LIMITED</strong>Paid AI provider call</div>
+    <div class="metric"><strong class="warn">REVIEW</strong>Automated test script</div>
+  </div>
+
+  <h2>1. Test environment</h2>
+  <table><tr><th>Component</th><th>Result</th><th>Details</th></tr>
+    <tr><td>Node.js</td><td class="pass">PASS</td><td>Node v24.19.0; JavaScript syntax checks passed for server, upcycle route, Gemini provider layer, and frontend script.</td></tr>
+    <tr><td>Backend</td><td class="pass">PASS</td><td>Running on <code>http://localhost:5000</code>; an existing listener was reused rather than starting a duplicate process.</td></tr>
+    <tr><td>Frontend</td><td class="pass">PASS</td><td>Running on <code>http://localhost:3000</code>; all tested application pages returned HTTP 200.</td></tr>
+    <tr><td>Credit policy</td><td class="pass">PASS</td><td>No repeated or stress AI calls were made. Paid provider behavior was not hammered during testing.</td></tr>
+  </table>
+
+  <h2>2. Backend tests</h2>
+  <table><tr><th>Test</th><th>Expected</th><th>Observed</th><th>What happened</th></tr>
+    <tr><td><code>GET /api/health</code></td><td>200</td><td class="pass">200</td><td>Backend returned status OK and a timestamp.</td></tr>
+    <tr><td><code>GET /api/upcycle</code></td><td>200</td><td class="pass">200</td><td>Returned 12 supported upcycle categories.</td></tr>
+    <tr><td><code>GET /api/upcycle/popular</code></td><td>200</td><td class="pass">200</td><td>Returned 5 popular ideas.</td></tr>
+    <tr><td><code>GET /api/services</code></td><td>200</td><td class="pass">200</td><td>Services endpoint responded successfully.</td></tr>
+    <tr><td><code>GET /api/marketplace</code></td><td>200</td><td class="pass">200</td><td>Marketplace endpoint responded successfully.</td></tr>
+    <tr><td><code>POST /api/upcycle/generate</code> with empty JSON</td><td>400</td><td class="pass">400</td><td>Required <code>itemName</code> and <code>material</code> validation worked.</td></tr>
+    <tr><td>Quantity 11</td><td>400</td><td class="pass">400</td><td>Quantity limit of 1–10 was enforced.</td></tr>
+    <tr><td><code>POST /api/upcycle/generate-from-image</code> without a file</td><td>400</td><td class="pass">400</td><td>Returned “Upload an image first”; no AI call was made.</td></tr>
+    <tr><td>Wrong multipart field</td><td>400</td><td class="pass">400</td><td>Rejected the unexpected field.</td></tr>
+    <tr><td>Text file uploaded as an image</td><td>400</td><td class="pass">400</td><td>Multer rejected unsupported MIME types before AI processing.</td></tr>
+    <tr><td>Unknown API route</td><td>404</td><td class="pass">404</td><td>Unknown requests did not become false success responses.</td></tr>
+  </table>
+
+  <h2>3. Frontend and user-flow tests</h2>
+  <table><tr><th>Test</th><th>Result</th><th>Details</th></tr>
+    <tr><td>Application pages</td><td class="pass">PASS</td><td><code>index</code>, <code>upcycle</code>, <code>upload</code>, <code>result</code>, <code>marketplace</code>, <code>services</code>, <code>dashboard</code>, <code>admin</code>, <code>auth</code>, <code>signup</code>, <code>profile</code>, and <code>verify</code> served successfully.</td></tr>
+    <tr><td>Local asset references</td><td class="pass">PASS</td><td>Referenced local scripts, styles, and pages resolved successfully in the package test.</td></tr>
+    <tr><td>File selection state</td><td class="pass">PASS</td><td>Selecting an image updates the status to “Selected: filename”; an image preview is shown.</td></tr>
+    <tr><td>Automatic scan</td><td class="pass">PASS</td><td>Selection calls <code>scanImage(file)</code>, posts multipart field <code>image</code> to <code>/api/upcycle/generate-from-image</code>, and shows scan-complete or scan-failed state.</td></tr>
+    <tr><td>Size/type guard</td><td class="pass">PASS</td><td>Frontend rejects non-images and files over 10 MB; backend also enforces allowed image MIME types and a 10 MB limit.</td></tr>
+    <tr><td>Search links</td><td class="pass">PASS</td><td>Each generated idea creates URL-encoded Google, YouTube, and Pinterest links in new tabs.</td></tr>
+    <tr><td>Auth header</td><td class="pass">FIXED</td><td>The corrupted frontend token header was repaired to use <code>Authorization: Bearer &lt;token&gt;</code>. This preserves future authenticated flows without affecting guest mode.</td></tr>
+  </table>
+
+  <h2>4. AI behavior and credit-safe limits</h2>
+  <div class="card">
+    <p>The implementation is wired for Gemini, OpenAI, Groq, and OpenRouter-compatible vision providers. Image requests are normalized to a maximum of 8 detected items and 8 ideas. The configured Groq placeholder model containing “not-available” is skipped, preventing a guaranteed failed request.</p>
+    <p>A live paid AI generation request was deliberately not repeated during this test. This avoids consuming credits while still verifying the complete request path, validation, provider wiring, normalization, fallback shape, and frontend rendering path. To verify a real provider once, upload one ordinary object image and wait for one result; do not repeatedly press scan.</p>
+    <p class="small">A successful provider response, Supabase persistence, and an authenticated session require valid runtime credentials and cannot be proven from static or validation-only tests.</p>
+  </div>
+
+  <h2>4A. Direct upcycle search and upload-query tests</h2>
+  <table><tr><th>Scenario</th><th>Result</th><th>Observed behavior</th><th>Conclusion</th></tr>
+    <tr><td>Search field with generated idea text</td><td class="pass">PASS — code path verified</td><td>The search handler lowercases the query and filters title, purpose, and materials on every input event. Difficulty and sort controls remain independent.</td><td>Queries such as “planter”, “storage”, “easy”, or a material name can match generated results.</td></tr>
+    <tr><td>Online search query links</td><td class="pass">PASS</td><td>Each rendered idea URL-encodes the idea title, detected/manual item name, and “upcycling tutorial”, then creates Google, YouTube, and Pinterest links.</td><td>Search links are generated safely without scraping or repeated API calls.</td></tr>
+    <tr><td>Upload with no file</td><td class="pass">PASS</td><td>Backend returned HTTP 400 with “Upload an image first.”</td><td>Empty upload is handled before AI.</td></tr>
+    <tr><td>Upload with invalid text content</td><td class="pass">PASS</td><td>Backend returned HTTP 400 because the MIME type was not an allowed image.</td><td>Invalid files do not reach AI.</td></tr>
+    <tr><td>Upload with a tiny valid PNG</td><td class="warn">LIMITED</td><td>Multipart upload reached the image route and returned HTTP 200 with an empty fallback result because the image contained no recognizable object and configured providers did not return usable output.</td><td>The transport path works, but this is not a successful AI recognition result.</td></tr>
+    <tr><td>Upload with one real local PNG</td><td class="warn">LIMITED</td><td>The route again reached the provider chain but returned an empty fallback result. No useful detected items or ideas were produced.</td><td>AI configuration/model availability must be fixed for useful upload results.</td></tr>
+  </table>
+  <p><strong>Correction made after this test:</strong> an empty vision fallback is no longer returned as a false HTTP 200 success. The final package now returns HTTP 503 with <code>AI_UNAVAILABLE</code>, allowing the frontend to show a truthful error and preventing users from assuming the scan succeeded.</p>
+
+  <h2>5. Issues found during testing</h2>
+  <table><tr><th>Issue</th><th>Impact</th><th>Resolution</th></tr>
+    <tr><td>Corrupted bearer-token header in shared frontend API helper</td><td class="warn">Medium</td><td class="pass">Fixed in the Hackemhex package and repository source. Syntax rechecked.</td></tr>
+    <tr><td>Placeholder automated test script</td><td class="warn">Low/Medium</td><td class="warn">Not fixed in this report pass. <code>npm test</code> currently exits with “no test specified”; a real test suite should be added.</td></tr>
+    <tr><td>Offline demo is a top-level folder</td><td class="warn">Low</td><td>Expected behavior: it is opened directly from <code>offline-demo/index.html</code>, not served under the frontend server’s <code>/offline-demo</code> URL.</td></tr>
+    <tr><td>Provider-dependent AI and Supabase paths not fully live-tested</td><td class="warn">High if credentials are invalid</td><td>Requires one controlled real-provider request and valid Supabase configuration; avoid repeated retries because the fallback chain can contact multiple providers.</td></tr>
+  </table>
+
+  <h2>6. Recommended improvements</h2>
+  <table><tr><th>Improvement</th><th>How to implement</th><th>Benefit</th><th>Required?</th></tr>
+    <tr><td>Add automated tests</td><td>Replace the placeholder <code>npm test</code> script with Node’s built-in test runner or Vitest. Mock AI and Supabase clients; test validation, normalization, and route responses.</td><td>Prevents regressions without spending AI credits.</td><td class="pass">Yes, recommended</td></tr>
+    <tr><td>Add provider health checks</td><td>Expose an admin-only diagnostic that reports configured provider names/models without exposing keys; use a dry-run configuration check where supported.</td><td>Identifies invalid models before users upload images.</td><td class="pass">Recommended</td></tr>
+    <tr><td>Use one provider per user request</td><td>Record provider availability briefly and avoid immediately retrying known-invalid providers; keep fallback to the next provider only when needed.</td><td>Reduces cost and latency.</td><td class="pass">Yes for production</td></tr>
+    <tr><td>Compress images before vision calls</td><td>Resize large client images to a bounded dimension and JPEG quality before multipart upload, while retaining the original only when needed.</td><td>Lower bandwidth, faster requests, and lower vision token/image cost.</td><td class="warn">Recommended</td></tr>
+    <tr><td>Move external search URL creation server-side</td><td>Return approved platform URLs from a small shared helper, with URL encoding and an allowlist.</td><td>Consistent links and easier future platform additions.</td><td>No; current client links work</td></tr>
+    <tr><td>Protect production guest mutations</td><td>Re-enable Supabase Auth or add server-issued guest session identifiers and rate limits for uploads and marketplace writes.</td><td>Prevents abuse and unauthorized data changes.</td><td class="pass">Yes before deployment</td></tr>
+    <tr><td>Rotate exposed provider secrets</td><td>Revoke and replace any keys that were placed in desktop files or shared during setup; keep only server-side environment variables.</td><td>Prevents unauthorized usage and unexpected credit loss.</td><td class="pass">Yes immediately</td></tr>
+  </table>
+
+  <h2>7. Final conclusion</h2>
+  <p class="card"><strong>Current result: core functionality is ready for controlled preview use.</strong> Upload validation, page serving, image selection UI, automatic scan wiring, object/idea rendering paths, external search links, and API error handling are working. The remaining uncertainty is external-provider behavior with the currently configured credentials. Perform one real image scan after confirming the selected vision model and rotate any exposed keys before sharing or deploying the package.</p>
+</main>
+</body>
+</html>

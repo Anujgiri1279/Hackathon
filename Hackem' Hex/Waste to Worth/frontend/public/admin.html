@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waste2Worth - Admin settings</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.admin-shell{max-width:850px;margin:48px auto}.provider-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:24px 0}.provider-tab{padding:12px;border:1px solid var(--line);background:var(--surface);border-radius:8px;font-weight:700}.provider-tab.selected{background:var(--ink);color:var(--surface)}.admin-form{display:grid;gap:16px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}.admin-form label{display:grid;gap:6px;font-weight:700}.admin-form input{padding:11px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.admin-message{min-height:24px}.admin-note{color:var(--moss-dark);font-size:.9rem}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="wrap"><a href="index.html" class="brand">Waste2<span>Worth</span></a><a href="index.html">Back to website</a></div></nav>
+<main class="admin-shell">
+<div class="section-head"><h1>Admin settings</h1><p class="lede">Configure provider keys and site settings without editing .env manually.</p></div>
+<form id="adminLogin" class="admin-form"><label>Admin password<input id="adminPassword" type="password" autocomplete="current-password" required></label><button class="btn btn-primary" type="submit">Unlock settings</button><p id="adminMessage" class="admin-message error-message" role="alert"></p></form>
+<section id="adminPanel" hidden>
+<p class="admin-note">Keys are masked after loading. Existing masked values are preserved when you save other fields. Restart the backend after saving.</p>
+<div id="providerGrid" class="provider-grid"></div>
+<form id="providerForm" class="admin-form"></form>
+</section>
+</main>
+<script src="js/config.js"></script><script src="js/admin.js"></script>
+</body>
+</html>

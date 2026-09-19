@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waste2Worth - Your profile</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="site-nav"><div class="wrap"><a href="index.html" class="brand">Waste2<span>Worth</span></a><ul class="nav-links"><li><a href="dashboard.html">Dashboard</a></li><li><a href="upcycle.html">Upcycle</a></li><li><button id="logoutButton" class="btn btn-secondary" type="button">Sign out</button></li></ul></div></nav>
+<main class="wrap auth-shell">
+  <div class="section-head">
+    <h1>Your profile</h1>
+    <p class="lede">Your account is ready. Check your details before continuing to Waste2Worth.</p>
+  </div>
+  <form id="profilePageForm" class="upload-panel">
+    <label>Full name<input id="profileFullName" name="fullName" required maxlength="120" autocomplete="name"></label>
+    <label>Email<input id="profileEmail" name="email" type="email" required maxlength="254" autocomplete="email"></label>
+    <label>Phone number<input id="profilePhone" name="phone" type="tel" required maxlength="30" autocomplete="tel"></label>
+    <label>City or location<input id="profileLocation" name="location" required maxlength="160" autocomplete="address-level2"></label>
+    <button class="btn btn-primary" type="submit">Save and continue</button>
+    <p id="profilePageMessage" class="error-message" role="status"></p>
+  </form>
+</main>
+<script src="js/config.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>
